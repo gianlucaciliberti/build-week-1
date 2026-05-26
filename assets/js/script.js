@@ -134,10 +134,10 @@ startButton.addEventListener("click", function () {
 const renderQuiz = () => {
   const questionNow = QUESTIONS[currentQuestion];
   const answersAll = [questionNow.correct_answer, ...questionNow.incorrect_answers];
-  
+  answersAll.sort(() => Math.random)
   app.innerHTML = `
   <div class="quiz">
-  <p>Domanda ${currentQuestion+1} di 10</p>
+  <p>Domanda ${currentQuestion+1} di ${QUESTIONS.length}</p>
   <h2>${questionNow.question}</h2>
   <div class="risposte">
   ${answersAll.map(answer => `
