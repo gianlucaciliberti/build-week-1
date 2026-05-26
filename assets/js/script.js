@@ -71,12 +71,7 @@ const QUESTIONS = [
     correct_answer: "Falso",
     incorrect_answers: ["Vero"],
   },
-  {
-    question:
-      "Quale linguaggio di programmazione condivide il nome con un'isola dell'Indonesia?",
-    correct_answer: "Java",
-    incorrect_answers: ["Python", "C", "Jakarta"],
-  },
+
   {
     question: "Qual è la celebre frase di Nils Liedholm?",
     correct_answer: "in 10 si gioca meglio",
@@ -137,12 +132,76 @@ startButton.addEventListener("click", function () {
 });
 
 const renderQuiz = () => {
-  app.innerHTML = `<div class= "benvenuto">
-<h2>Questa è la pagina del quiz</h2>
+  const questionNow = QUESTIONS[currentQuestion];
+  const answersAll = [questionNow.correct_answer, ...questionNow.incorrect_answers];
+  
+  app.innerHTML = `
+  <div class="quiz">
+  <p>Domanda ${currentQuestion+1} di 10</p>
+  <h2>${questionNow.question}</h2>
+  <div class="risposte">
+  ${answersAll.map(answer => `
+    <button class="btn-answer">${answer}</button>`).join("")}
+    </div>
+    </div>` ;
 
-<p>Qual è la celebre frase di Nils Liedholm?</p>
-<ul>
-<li>in 10 si gioca meglio</li>
-<li>Python</li>
-</div>`;
+    const answersButtons = document.querySelectorAll(".btn-answer");
+    answersButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const selected = button.textContent;
+        answersButtons.forEach (btn => {
+          btn.disabled=true ;
+        });
+        if (selected===questionNow.correct_answer) {
+          button.classList.add("correct");
+          score++;
+        } else {
+          button.classList.add("wrong");
+          answersButtons.forEach(btn => {
+            if (btn.textContent===questionNow.correct_answer) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+        setTimeout(() => {
+          currentQuestion++;
+          if(currentQuestion<QUESTIONS.length) {
+            renderQuiz();
+          } else {
+            renderResults();
+          }
+        }, FEEDBACK_DELAY);
+      });
+    });  
+  }
+
+//javier e marco fanno questo pezzo
+const renderResults = () => {
+  app.innerHTML = `<div class= "results">
+  
+  <h3>Risultati</h3>
+  <p class="completamento">Hai completato il quiz.</p>
+  <br>
+  <br>
+  <p class="percentuale">70%</p>
+  <br>
+  <br>
+  <p class="promosso">Promosso</p> 
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="progresso">
+  Corrette<div class="progressBarSopra"></div>7/10
+  </div>
+  <br>
+  <div class="progresso">
+  Sbagliate <div class="progressBarSotto"></div>3/10
+  </div>
+  <div> 
+  <button id="buttonRestart">Ricomincia</button>
+  </div>
+  </div>`; //percentuale e promosso , da collegare a js promosso e bocciato
+  
 };
+
