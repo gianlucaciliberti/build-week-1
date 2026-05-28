@@ -107,8 +107,6 @@ const app = document.querySelector("#app"); //collega al main dell html
 const shuffleQuestions = () => {
   shuffledQuestions = [...QUESTIONS].sort(() => Math.random() -0.5);
 };
-//Creo un'array con domande mescolate
-
 
 //SCHERMATA
 //1 INIZIALE
@@ -116,14 +114,14 @@ const shuffleQuestions = () => {
 //
 //
 const renderWelcome = () => {
-  app.innerHTML = `<div class= "benvenuto">
+  app.innerHTML = `<div class= "welcome">
 <h2>Benvenuto al tuo esame</h2>
 
 <p>Una serie di 10 domande sul 
 mondo dell'informatica e del web.
  Per ogni domanda hai 20 secondi di tempo.</p>
 <ul>
-<li>in 10 si gioca meglio</li>
+<li>Ogni domanda è a tempo e puoi ricevere una sola risposta/li>
 <li>Una volta cliccata una risposta, la domanda è chiusa.</li>
 <li>Il quiz dura circa 3 minuti.</li>
 </ul>
@@ -195,7 +193,7 @@ const startTimer = () => {
     suonoTick.play(); //da il suono del tick */
     if (timeLeft <= 5) {
       //se va sotto i 5 secondi
-      scegliTimer.classList.add("timerRosso"); //allora dagli il css del timer rosso
+      scegliTimer.classList.add("red-timer"); //allora dagli il css del timer rosso
     }
 
     if (timeLeft <= 0) {
@@ -222,7 +220,6 @@ const renderQuiz = () => {
     questionNow.correct_answer,
   ];
   answersAll.sort(() => Math.random() - 0.5);
-
   const answersHTML = answersAll
     .map((risposta) => {
       return `<button class="btn-answer">${risposta}</button>`;
@@ -230,19 +227,19 @@ const renderQuiz = () => {
     .join("");
 
   //incollato js quiz
-  app.innerHTML = `<div class= "domanda">
+  app.innerHTML = `<div class= "quiz-container">
   <span class= "question-counter">Domanda ${currentQuestion + 1} di ${QUESTIONS.length} </span>
-<p id = "timer" class = "timerNero">20s</p>
+<p id = "timer" class = "black-timer">20s</p>
    </div>
   <div class= "quiz">
   <h4>${questionNow.question}</h4>
-  <div class= "risposte">${answersHTML}</div>
+  <div class= "answers">${answersHTML}</div>
 </div>`;
+
   const buttonsAnswers = document.querySelectorAll(".btn-answer");
 
   buttonsAnswers.forEach((bottone) => {
     bottone.addEventListener("click", function (event) {
-      clearInterval(timerId);
       buttonsAnswers.forEach((b) => {
         b.disabled = true;
       });
@@ -263,11 +260,11 @@ const renderQuiz = () => {
       }
 
       setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < QUESTIONS.length) {
+        if (currentQuestion < QUESTIONS.length - 1) {
+          currentQuestion++;
           renderQuiz();
         } else {
-          renderResults(); 
+          renderResults();
         }
       }, FEEDBACK_DELAY);
     });
@@ -277,7 +274,6 @@ const renderQuiz = () => {
   startTimer(); //aggiungo il render dello startTimer qui
   // per darlo subito appena parte ogni domanda
 };
-
 
 renderWelcome(); //portami alla main
 
@@ -295,29 +291,112 @@ const graduation = () => {
 };
 const renderResults = () => {
   const percentageWright = (score / 10) * 100;
-  const percentageWrong = ((TOTAL_QUESTIONS - score) / 10) * 100;
-  const percentageTotal = ((TOTAL_QUESTIONS / 10) * 100);
+  const percentageWrong = ((QUESTIONS.length - score) / 10) * 100;
+  const percentageTotal = ((QUESTIONS.length / 10) * 100);
 
   // in progressBarSotto mettere ${percentageTotal - percentage}
-  app.innerHTML = `<div class= "results">
+  app.innerHTML = `<div class="results-container">
+
+  <h2 class="results-title">Risultati</h2>
+
+  <p class="complete-quiz">Hai completato il quiz.</p>
   
-  <h3>Risultati</h3>
-  <p class="completamento">Hai completato il quiz.</p>
   <p class="percentage">${percentageWright}%</p>
   <div class="graduation">${graduation()}</div> 
-  <div class="progresso">
-  <span>Corrette<div class="progressBarTotal" style="width: ${percentageTotal}%"><div class="progressBarSopra" style="width: ${percentageWright}%">
-  </div></div>${score}/10</span>
+  <div class="progress">
+  Corrette<div class="progressBarTotal" style="width: ${percentageTotal}%"><div class="progressBarTop" style="width: ${percentageWright}%">
+  </div></div>${score}/10
   </div>
-  <div class="progresso">
-  <span>Sbagliate <div class="progressBarTotal"  style="width: ${percentageTotal}%"><div class="progressBarSotto" style="width: ${percentageWrong}%"> 
-  </div></div>${TOTAL_QUESTIONS - score}/10</span>
+  <div class="progress">
+  Sbagliate <div class="progressBarTotal"  style="width: ${percentageTotal}%"><div class="progressBarBottom" style="width: ${percentageWrong}%"> 
+  </div></div>${QUESTIONS.length - score}/10
   </div>
   <div> 
   <button id="buttonRestart">Ricomincia</button>
   </div>
   </div>`; //percentuale e promosso , da collegare a js promosso e bocciato
+
+
+  const restartButton = document.getElementById("buttonRestart");
+  restartButton.addEventListener("click", function () {
+    renderWelcome();
+  });
+
 };
-renderWelcome(); //riavvio l'applicazione per caricare tutto ,
+
+
+const renderFeedback = () => {
+  app.innerHTML = `
+  <div class= "feedback">
+    <h2 class="title-feed">Come valuteresti la tua esperienza complessiva?</h2>
+
+    <div class="star-container">
+      <div class="star"> 
+        <button class="star-image" type="button" data-value="1">&#9734;</button>
+        <span class="star-number">1</span>
+        <span class="star-text">Pessima</span>
+      </div> 
+
+      <div class="star"> 
+        <button class="star-image" type="button" data-value="2">&#9734;</button>
+        <span class="star-number">2</span>
+        <span class="star-text">Scarsa</span>
+      </div> 
+
+      <div class="star"> 
+        <button class="star-image" type="button" data-value="3">&#9734;</button>
+        <span class="star-number">3</span>
+        <span class="star-text">Neutra</span>
+      </div> 
+
+      <div class="star"> 
+        <button class="star-image" type="button" data-value="4">&#9734;</button>
+        <span class="star-number">4</span>
+        <span class="star-text">Buona</span>
+      </div> 
+
+      <div class="star"> 
+        <button class="star-image" type="button" data-value="5">&#9734;</button>
+        <span class="star-number">5</span>
+        <span class="star-text">Eccellente</span>
+      </div> 
+    </div>
+  </div>
+  
+  <div class="what-liked">
+    <label class="liked-label">Cosa ti è piaciuto di più?</label>
+    <textarea id="liked-text" maxlength="500" placeholder="Condividi qui i tuoi pensieri..."></textarea>
+    <div id="char-counter-liked">0 / 500 caratteri</div>          
+  </div>
+
+  <div class="what-advice">
+    <label class="advice-label">Cosa possiamo migliorare?</label>
+    <textarea id="advice-text" maxlength="500" placeholder="Condividi qui i tuoi pensieri..."></textarea>
+    <div id="char-counter-advice">0 / 500 caratteri</div>          
+  </div>
+
+  <div class="email">
+    <label class="email-label">La tua email <span>(facoltativa)</span></label>
+    <input type="email" id="email-text" placeholder="es. nome@mail.it"></input>     
+  </div>
+
+
+  <button id="submit-feed">Invia Feedback</button>
+  `;
+
+// const selectedStar = document.getElementsByClassName("star-image");
+ // star-image.addEventListener("click", function () {
+  //  return `&#9733;`;
+ // });
+}
+
+renderWelcome();
+ //riavvio l'applicazione per caricare tutto ,
+/*renderFeedback();
+
+renderWelcome();*/
+
+
+//riavvio l'applicazione per caricare tutto ,
 //  si mette in basso perche vogliamo assicurarci che il browser legga prima tutto
 //  il contenuto di javascript e poi sia pronto ad esesguire le funzioni
