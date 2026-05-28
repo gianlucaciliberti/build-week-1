@@ -20,6 +20,20 @@ HTML;CSS;JAVASCRIPT
 
 ## STRUTTURA DEL PROGETTO
 <!--Da capire come fare-->
+ 
+ ```
+buildweek1/
+├── assets/
+│  ├── css/
+│  │  └── style.css
+│  ├── js/
+│  │ └── script.js
+│  ├── img/
+│  └── sounds/
+├── index.html
+└── README.md
+```
+
 
 
 ## FUNZIONI PRINCIPALI
@@ -32,6 +46,7 @@ Lavorare in team ed esercitarsi su manipolazione DOM, rendering dimanico ecc.
 
 ## POSSIBILI MIGLIORIE
 LocalStorage per salvare risultati del quiz e feedback, tentativi max 3
+
 
 
 
