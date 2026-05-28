@@ -7,7 +7,7 @@ approccio:
 -state --> render --> events
 -manipolazione del DOM
 -gestione eventi con addEventListener
--codice ES6
+-codice ES6+
 
 
 ## FUNZIONALITÀ <!--COME È STRUTTURATO E COSA FA-->
