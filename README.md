@@ -56,11 +56,14 @@ L'applicazione segue il pattern architetturale **State ➡️ Render ➡️ Even
 
 ## Funzioni Principali
 Il comportamento e l'interattività dell'applicazione sono governati dalle seguenti funzioni JavaScript
--
--
--
--
--
+ ### renderWelcome
+ gfngjrnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+### renderquiz
+gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+
+
+
 
 ---
 
