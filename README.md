@@ -22,12 +22,9 @@ L'obiettivo principale di questa Build Week è stato simulare un ambiente di lav
 ## Tecnologie Utilizzate
 L'applicazione è stata sviluppata utilizzando un parco tecnologie snello e performante:
 <!-- eventualmente aggiungere badge, screenshot e quant'altro -->
--
--
--
--
--
-
+-🌐 HTML               # Per definire la struttura della singola pagina
+-🎨 CSS                # Per controllare la parte stilistica del progetto
+-⚡ JavaScript         # Per creare contenuti dinamici e manipolare i singoli eventi
 
 ---
 
@@ -69,12 +66,14 @@ Il comportamento e l'interattività dell'applicazione sono governati dalle segue
 
 ## Funzionalità nel Dettaglio
 L'applicazione integra accorgimenti specifici per ottimizzare l'esperienza utente ed evitare i bug tipici del DOM:
--
--
--
--
--
-
+- Method sort(()=> Math.random() -0.5)              # Individuare un'array iniziale, generarne uno con diverso ordine delle domande e, in seguito, mischiare le risposte 
+- Property innerHTML                                # Gestire il contenuto delle singole pagine mostrate a schermo
+- Method querySelector & querySelectorAll           # Collegare i tre linguaggi utilizzati e gestirne le funzionalità
+- Method classList.add                              # Per poter modificare stilisticamente determinati oggetti
+- Method map(...).join("")                          # Trasformare le stringhe di un array in button e restituirgli il parametro stringa
+- Method forEach                                    # Aggiornare dinamicamente lo score del punteggio e mostrare alla fine il risultato ottenuto          
+- Function setTimeout                               # Controllare il delay prima di mostrare la pagina successiva dopo il click dell'utente
+- Function setInterval & clearInterval              # Creare e rendere autonomo il timer delle domande
 ---
 
 ## Possibili Migliorie
