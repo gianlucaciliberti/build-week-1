@@ -10,25 +10,26 @@ Benvenuto nel repository di **EPIQUIZ**, un'applicazione web interattiva per qui
 5. [⚙️ Funzioni Principali](#funzioni-principali)
 6. [💡 Funzionalità nel Dettaglio](#funzionalita-nel-dettaglio)
 7. [🚀 Possibili Migliorie](#possibili-migliorie)
+
 ---
-## Obiettivi del Progetto
+## 🎯Obiettivi del Progetto
 L'obiettivo principale di questa Build Week è stato simulare un ambiente di lavoro reale in team, focalizzandoci su:
 - **Manipolazione avanzata del DOM** senza l'ausilio di framework esterni.
 - **Gestione dello stato globale** dell'applicazione in JavaScript.
 - Controllo dei flussi temporali asincroni (`setInterval` e `setTimeout`).
 - Integrazione di librerie esterne tramite CDN (Chart.js per i grafici dei risultati).
 - Scrittura di codice moderno, modulare e pulito seguendo gli standard **ES6**.
+
 ---
-## Tecnologie Utilizzate
+## 💻Tecnologie Utilizzate
 L'applicazione è stata sviluppata utilizzando un parco tecnologie snello e performante:
-<!-- eventualmente aggiungere badge, screenshot e quant'altro -->
 - 🌐 **HTML** → Per definire la struttura della singola pagina
 - 🎨 **CSS**  → Per controllare la parte stilistica del progetto
 - ⚡ **JavaScript** → Per creare contenuti dinamici e manipolare i singoli eventi
 
 ---
 
-## Struttura del Progetto
+## 📂Struttura del Progetto
 Il progetto è strutturato come una **Single Page Application (SPA)**. Il file HTML rimane fisso, mentre JavaScript si occupa di svuotare e ripopolare il tag `<main id="app">` in base alla schermata corrente.
 ```text
 ├── index.html                  # File HTML principale (Entry-point unico)
@@ -44,38 +45,54 @@ Il progetto è strutturato come una **Single Page Application (SPA)**. Il file H
 
 ---
 
-## Architettura del Codice (State-Render-Events)
+## 🔧Architettura del Codice (State-Render-Events)
 L'applicazione segue il pattern architetturale **State ➡️ Render ➡️ Events**, garantendo una separazione netta tra i dati e l'interfaccia visiva:
--
--
--
--
--
+
+* **State (Stato Globale):** Un insieme di variabili mutabili (`currentQuestion`, `score`, `timerId`, `shuffledQuestions`, `timeLeft`) mantiene il controllo in ogni istante dello stato dell'applicazione.
+* **Render (Visualizzazione):** Funzioni dedicate (`renderWelcome`, `renderQuiz`, `renderResults`, `renderFeedback`, `renderThanksFeed`) leggono lo Stato attuale e iniettano dinamicamente i blocchi HTML nel DOM tramite `app.innerHTML`.
+* **Events (Gestione Eventi):** I listener di eventi (`addEventListener`) intercettano le azioni dell'utente (click sulle risposte, pulsanti di avanzamento, interazione con le stelle), aggiornano i dati nello Stato e triggerano la successiva funzione di Render.
 
 ---
 
-## Funzioni Principali
-Il comportamento e l'interattività dell'applicazione sono governati dalle seguenti funzioni JavaScript
+## 🎯Funzioni Principali
+Il comportamento e l'interattività dell'applicazione sono governati dalle seguenti funzioni JavaScript:
 
-
-
+### `renderWelcome()` 
+Genera la schermata iniziale di benvenuto. Inizializza lo stato del quiz (azzerando score e numero domanda) e mescola l'array delle domande tramite la funzione `shuffleQuestions()`. In questo modo le domande verranno prese in maniera casuale, così come le risposte (garantendo che la risposta corretta non si trovi nella stessa posizione per tutte le domande).
+### `renderQuiz()`
+ Il motore principale dell'applicazione. Si occupa di:
+  * Pushare la domanda corrente (prendendola da un nuvo array `let shuffledQuestions = [];`) e le relative opzioni di risposta (mescolate dinamicamente anch'esse).
+  * Gestire gli eventi di click sulle risposte, applicando le classi CSS (`.correct` o `.wrong`) per il feedback visivo immediato e disabilitando i bottoni per prevenire click multipli.
+  * Invocare uno `startTimer()` per la gestione del countdown di 20 secondi.
+  * Partenza di una funzione di supporto `handleTimeout()`, che scatta se il tempo a disposizione esaurisce o al click di una risposta. Ferma il timer, evidenziando la risposta corretta e utilizza un `setTimeout` per passare alla domanda successiva dopo un tempo prestabilito (`const FEEDBACK_DELAY = 1500;`).
+### `renderResults()`
+ Invocata al termine del quiz. Calcola le percentuali finali e fa partire la libreria **Chart.js** per renderizzare un grafico a ciambella interattivo. Gestisce anche l'animazione fluida (`setInterval`) del numero percentuale a centro schermo. Vi è inoltre un bottone restart (`const restartButton`) che permette di ritornare alla schermata Welcome, per poter riprovare il quiz.
+### `renderFeedback()` e `renderThanksFeed()`
+ Gestiscono il flusso finale post-quiz. Creano un'interfaccia interattiva a 5 stelle (dinamiche al passaggio del mouse e al click) e i campi di testo, portando infine l'utente alla schermata di ringraziamento.
 
 ---
 
-## Funzionalità nel Dettaglio
+## ⚙️Funzionalità nel Dettaglio
 L'applicazione integra accorgimenti specifici per ottimizzare l'esperienza utente ed evitare i bug tipici del DOM:
-- **Method sort(()=> Math.random() -0.5)** ➤ Utilizzato per randomizzare l’ordine delle domande e mischiare dinamicamente le risposte del quiz
-- **Property innerHTML** ➤ Impiegata per aggiornare e gestire i contenuti mostrati nelle diverse schermate dell’applicazione
-- **Method querySelector & querySelectorAll** ➤ Utilizzati per selezionare e manipolare gli elementi del DOM, collegando struttura, stile e logica del progetto
-- **Method classList.add** ➤ Per poter modificare stilisticamente determinati oggetti
-- **Method map(...).join("")**  ➤ Sfruttato per generare dinamicamente elementi HTML a partire dagli array, creando automaticamente i pulsanti delle risposte
-- **Method forEach**  ➤ Utilizzato per aggiornare in tempo reale il punteggio e gestire la visualizzazione del risultato finale          
-- **Function setTimeout**  ➤ Impiegata per controllare il delay tra l’azione dell’utente e il caricamento della schermata successiva
-- **Function setInterval & clearInterval**  ➤ Utilizzate per creare, aggiornare e interrompere il timer automatico delle domande
+
+ **Method sort(()=> Math.random() -0.5)** ➤ Utilizzato per randomizzare l’ordine delle domande e mischiare dinamicamente le risposte del quiz
+ **Property innerHTML** ➤ Impiegata per aggiornare e gestire i contenuti mostrati nelle diverse schermate dell’applicazione
+ **Method querySelector & querySelectorAll** ➤ Utilizzati per selezionare e manipolare gli elementi del DOM, collegando struttura, stile e logica del progetto
+ **Method classList.add** ➤ Per poter modificare stilisticamente determinati oggetti
+ **Method map(...).join("")**  ➤ Sfruttato per generare dinamicamente elementi HTML a partire dagli array, creando automaticamente i pulsanti delle risposte
+ **Method forEach**  ➤ Utilizzato per aggiornare in tempo reale il punteggio e gestire la visualizzazione del risultato finale          
+ **Function setTimeout**  ➤ Impiegata per controllare il delay tra l’azione dell’utente e il caricamento della schermata successiva
+ **Function setInterval & clearInterval**  ➤ Utilizzate per creare, aggiornare e interrompere il timer automatico delle domande
+
 ---
 
-## Possibili Migliorie
-Per futuri cicli di sviluppo, sono state identificate le seguenti ottimizzazioni:
+## 🚀Possibili Migliori
+Per futuri cicli di sviluppo, analizzando l'attuale base di codice, sono state identificate le seguenti ottimizzazioni:
+
+* **Recap risposte:** Attualmente l'utente non è in grado di poter visionare un recap delle domande con un salvataggio della risposta. Vorremmo implementare questa funzione nella sezione `renderResults`, ad esempio con un menù a tendina: mostrando la risposta corretta e quella dell'utente (nel caso sia errata).
+* **Persistenza dei Dati (Local Storage):** Attualmente i dati si resettano al ricaricamento della pagina. L'implementazione del `localStorage` permetterebbe di salvare lo storico delle valutazioni e mantenere traccia del feedback dell'utente anche chiudendo il browser o dopo il refresh.
+* **Gestione dei Tentativi (Vite/Tentativi):** Introdurre un sistema a "vite" (es. massimo 3 possibilità di rifare il quiz). Così che dopo aver riprovato il quiz un determinato numero di volte, non sia più possibile premere restart e riprovare. 
+* **Invio reale del Feedback:** Attualmente il form di feedback (stelle e textarea) si occupa solo del lato frontend (replicando l'UX reale, ma senza cambiamenti effettivi). Sarebbe ideale collegarlo a un servizio email o a un backend reale per raccogliere effettivamente i dati degli utenti.
 
 
 
