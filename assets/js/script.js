@@ -9,9 +9,9 @@
 
 /* ARRAY MODIFICATO DIVERTENTE */
 
-/*const QUESTIONS = [
+const QUESTIONS = [
   {
-    question: "In azienda , la consegna del progetto è sempre :",
+    question: "In azienda, la consegna del progetto è sempre:",
     correct_answer: "Ieri",
     incorrect_answers: [
       "Il prima possibile",
@@ -22,25 +22,35 @@
   {
     question:
       "Quali sono i nomi di personaggi più utilizzati nel linguaggio JavaScript?",
-    correct_answer: "Pippo, Pluto , Paperino",
-    incorrect_answers: ["Topolino, Minnie, Paperino", "Braccio di Ferro, Olivia, Bruto", "Mr.Incredible ,Elastigirl , Flash"],
+    correct_answer: "Pippo, Pluto, Paperino",
+    incorrect_answers: ["Qui, Quo, Qua", "Braccio di Ferro, Olivia, Bruto", "Mr.Incredible ,Elastigirl , Flash"],
   },
   {
-    question: "Il logo di Snapchat è una campana.",
-    correct_answer: "Falso",
-    incorrect_answers: ["Vero"],
-  },
-  {
-    question:
-      "I puntatori sono stati introdotti in C++ e non c'erano nel linguaggio C originale.",
-    correct_answer: "Falso",
-    incorrect_answers: ["Vero"],
+    question: "Quali sono i peggiori nemici dello sviluppatore?",
+    correct_answer: "Le altre sono tutte corrette",
+    incorrect_answers: ["I colleghi a cui non piace lavorare in team", "L' AI soprattutto se Chat GPT", "Il MacBook se utilizzato per sviluppare"],
   },
   {
     question:
-      "Qual è il formato immagine più usato per i loghi nel database di Wikimedia?",
-    correct_answer: ".svg",
-    incorrect_answers: [".png", ".jpeg", ".gif"],
+      "A cosa serve il corso in Full Stack Development",
+    correct_answer: "Ad imparare come utilizzare Git e GitHub",
+    incorrect_answers: ["Ad imparare come scrivere e gestire il codice"],
+  },
+  {
+    question:
+      "Cosa speri che ti dia la vita?",
+    correct_answer: "Che mi insegni a pescare",
+    incorrect_answers: ["Che mi dia un pesce"],
+  },
+  {
+    question: "Se chiedi all' AI la biografia di Manzoni come ti risponde?",
+    correct_answer: "Mi dà come risultato la biografia di Alessandro Manzoni perfetta per un ragazzo delle scuole medie.",
+    incorrect_answers: ["Mi dà come risultato la biografia di Piero Manzoni, uno dei più grandi, ironici e famosi artisti concettuali del Novecento.",],
+  },
+  {
+    question: "Qual è il nome in codice del sistema operativo Android 7.0?",
+    correct_answer: "Nougat",
+    incorrect_answers: ["È una domanda, si accettano risposte", "Jelly Bean", "Marshmallow"],
   },
   {
     question: "Cosa significa l'acronimo CSS?",
@@ -52,31 +62,20 @@
     ],
   },
   {
-    question: "Qual è il nome in codice del sistema operativo Android 7.0?",
-    correct_answer: "Nougat",
-    incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
-  },
-  {
-    question: "Qual era il limite originale di caratteri di un Tweet?",
-    correct_answer: "140",
-    incorrect_answers: ["120", "160", "100"],
-  },
-  {
     question: "Linux è stato creato come alternativa a Windows XP.",
     correct_answer: "Falso",
     incorrect_answers: ["Vero"],
   },
-
   {
     question: "Qual è la celebre frase di Nils Liedholm?",
-    correct_answer: "in 10 si gioca meglio",
-    incorrect_answers: ["Python", "C", "Jakarta"],
+    correct_answer: "In 10 si gioca meglio",
+    incorrect_answers: ["Python è il miglior linguaggio", "C è molto complesso", "Un giorno andrò a Jakarta"],
   },
 ];
-*/
+
 
 /* ARRAY INIZIALE SERIO */
-
+/*
 const QUESTIONS = [
   {
     question: "Cosa significa l'acronimo CPU?",
@@ -141,6 +140,7 @@ const QUESTIONS = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+*/
 
 /* Costanti del quiz */
 const TOTAL_QUESTIONS = QUESTIONS.length;
@@ -167,7 +167,6 @@ let timerId = null;
 
 
 let shuffledQuestions = [];
-const suonoTick = new Audio("assets/sounds/tick2.wav"); //audio nel tick per un po di vitalita
 const app = document.querySelector("#app"); //collega al main dell html
 const shuffleQuestions = () => {
   shuffledQuestions = [...QUESTIONS].sort(() => Math.random() - 0.5);
@@ -176,8 +175,8 @@ const shuffleQuestions = () => {
 /* SCHERMATA DI BENVENUTO, RENDER WELCOME */
 
 const renderWelcome = () => {
-  app.innerHTML = 
-`<div class= "welcome">
+  app.innerHTML =
+    `<div class= "welcome">
   <h2>Benvenuto al tuo esame</h2>
   <p>Una serie di 10 domande sul mondo dell'informatica e del web. Per ogni domanda hai 20 secondi di tempo.</p>
   <ul>
@@ -188,7 +187,7 @@ const renderWelcome = () => {
   <button id="buttonStart">Inizia</button>
 </div>`;
 
-/* BOTTONE DI INIZIO QUIZ */
+  /* BOTTONE DI INIZIO QUIZ */
 
   const startButton = document.getElementById("buttonStart");
   startButton.addEventListener("click", function () {
@@ -204,7 +203,6 @@ const renderWelcome = () => {
 
 const handleTimeout = () => {
   clearInterval(timerId);
-  suonoTick.pause();
   const questionNow = shuffledQuestions[currentQuestion];
   const buttonsAnswers = document.querySelectorAll(".btn-answer");
   // Disabilita tutti i bottoni e mostra la risposta corretta
@@ -214,6 +212,7 @@ const handleTimeout = () => {
       button.classList.add("correct");
     }
   });
+
   // Passa alla domanda successiva dopo il delay
 
   setTimeout(() => {
@@ -269,10 +268,10 @@ const renderQuiz = () => {
     })
     .join("");
 
-    /* HTML DEL QUIZ */
-  
-  app.innerHTML = 
-`<div class= "quiz-container">
+  /* HTML DEL QUIZ */
+
+  app.innerHTML =
+    `<div class= "quiz-container">
     <span class= "question-counter">Domanda ${currentQuestion + 1} di ${QUESTIONS.length} </span>
     <p id = "timer" class = "black-timer">20s</p>
    </div>
@@ -281,7 +280,7 @@ const renderQuiz = () => {
     <div class= "answers">${answersHTML}</div>
 </div>`;
 
-/* FUNZIONE CLICK "CORRETTO", "SBAGLIATO", DISABILITATO */
+  /* FUNZIONE CLICK "CORRETTO", "SBAGLIATO", DISABILITATO */
 
   const buttonsAnswers = document.querySelectorAll(".btn-answer");
 
@@ -305,7 +304,7 @@ const renderQuiz = () => {
           }
         });
       }
-/* CHECK NUMERO DOMANDA -> ALLA SUCCESSIVA MA SE FINITO RENDER RESULTS */
+      /* CHECK NUMERO DOMANDA -> ALLA SUCCESSIVA MA SE FINITO RENDER RESULTS */
       setTimeout(() => {
         if (currentQuestion < QUESTIONS.length - 1) {
           currentQuestion++;
@@ -338,6 +337,7 @@ const graduation = () => {
 let resultChart = null;
 // IL COMPONENT DEI RISULTATI CORRETTO
 const renderResults = () => {
+  clearInterval(timerId);
   const totalQ = QUESTIONS.length;
   const wrongAnswers = totalQ - score;
 
@@ -349,7 +349,7 @@ const renderResults = () => {
   const verdettoTesto = haSuperato ? "Superato!" : "Fallito!";
   const verdettoClasse = haSuperato ? "text-passed" : "text-failed";
 
-/* HTML Sezione Results */
+  /* HTML Sezione Results */
 
   app.innerHTML = `
     <div class="results-container">
@@ -395,7 +395,7 @@ const renderResults = () => {
     </div>
   `;
 
- /* CHART JS, Grafico a torta */
+  /* CHART JS, Grafico a torta */
   const ctx = document.getElementById("resultChart").getContext("2d");
 
   if (resultChart !== null) {
@@ -460,15 +460,15 @@ const renderResults = () => {
   const goAhead = document.getElementById("button-gofeedback");
   goAhead.addEventListener("click", function () {
     renderFeedback();
-});
+  });
 }
 
 /* SCHERMATA DI FEEDBACL, RENDER FEEDBACK */
 
 const renderFeedback = () => {
 
-  app.innerHTML =  
-  `<div class= "feedback">
+  app.innerHTML =
+    `<div class= "feedback">
     <h2 class="title-feed">Come valuteresti la tua esperienza complessiva?</h2>
      <div class="star-container">
       <div class="star"> 
@@ -526,7 +526,7 @@ const renderFeedback = () => {
 
   /* 1. Logica delle stelle */
 
-const stars = document.querySelectorAll('.star-image');
+  const stars = document.querySelectorAll('.star-image');
   let currentRating = 0;
 
   stars.forEach(star => {
@@ -549,7 +549,7 @@ const stars = document.querySelectorAll('.star-image');
     });
   });
 
-/* BOTTONE PER ANDARE ALLA PAGINA CONCLUSIVA DI RINGRAZIAMENTI DOPO IL FEEDBACK */
+  /* BOTTONE PER ANDARE ALLA PAGINA CONCLUSIVA DI RINGRAZIAMENTI DOPO IL FEEDBACK */
   const sendFeedback = document.getElementById("submit-feed");
   sendFeedback.addEventListener("click", function () {
     renderThanksFeed();
@@ -565,6 +565,9 @@ const renderThanksFeed = () => {
   `;
 
 }
+
+
+
 
 renderWelcome();
 //riavvio l'applicazione per caricare tutto ,

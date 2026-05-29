@@ -1,3 +1,4 @@
+/*Reset Totale*/
 * {
   box-sizing: border-box;
 }
@@ -60,7 +61,7 @@ body {
 
 .welcome p {
   color: #1b2845;
-  font-size: 1rem;
+  font-size: 1.4rem;
   margin-bottom: 30px;
   font-weight: 40;
 }
@@ -72,7 +73,7 @@ body {
 }
 
 .welcome li {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #1b1535;
   padding: 2.5px;
 }
@@ -92,7 +93,7 @@ body {
 }
 
 #buttonStart:hover {
-  background-color: #1b273f;
+  background-color: #21355f;
   color: #ffffff;
   cursor: pointer;
 }
@@ -137,17 +138,20 @@ body {
 .red-timer {
   color: #ffffff !important;
   background-color: #ff3b30 !important;
-  animation: pulse 0.8s infinite alternate; /* pulsazione animata */
+  animation: pulse 0.8s infinite alternate;
+  /* pulsazione animata */
 }
 
 /* Comandi per le animazioni del browser */
 @keyframes pulse {
   0% {
-    transform: scale(1); /* dalla scala normale a quella piu grande dopo*/
+    transform: scale(1);
+    /* dalla scala normale a quella piu grande dopo*/
   }
 
   100% {
-    transform: scale(1.12);  /* ingrandisce del 12% */
+    transform: scale(1.12);
+    /* ingrandisce del 12% */
   }
 }
 
@@ -180,24 +184,27 @@ body {
 /* Blocca hover una volta data la risposta */
 
 .btn-answer:disabled {
-  cursor: default; /* blocca hover una volta data la risposta */
-  opacity: 1; /* non sbiadisce su safari e chrome */
+  cursor: default;
+  /* blocca hover una volta data la risposta */
+  opacity: 1;
+  /* non sbiadisce su safari e chrome */
 }
 
 /* Stilizzazione del Bottone Risposta */
 
 .btn-answer {
   width: 100%;
-  text-align: left; 
+  text-align: left;
   padding: 18px 24px;
   font-size: 1rem;
   font-family: Arial, sans-serif;
   color: #1b2845;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   border: 1px solid #1b2845;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease; /* transition fluida per gli hover */
+  transition: all 0.2s ease;
+  /* transition fluida per gli hover */
 }
 
 /* metto il not disabled perche altrimenti 
@@ -222,7 +229,7 @@ body {
 }
 
 .results-title {
-margin-top: -8px;
+  margin-top: -8px;
 }
 
 /* Paragrafo "Quiz completato */
@@ -255,7 +262,7 @@ margin-top: -8px;
 
 /* Verdetto del test superato (verde), fallito (rosso) */
 
-/* Testi dentro al grafico */ 
+/* Testi dentro al grafico */
 
 .center-verdict {
   font-size: 1.1rem;
@@ -269,7 +276,7 @@ margin-top: -8px;
   margin-top: 2px;
 }
 
-.text-passed{
+.text-passed {
   color: #2ed573 !important;
 }
 
@@ -319,11 +326,13 @@ margin-top: -8px;
   flex-direction: column;
   align-items: flex-start;
   padding-right: 20px;
-  border-right: 1px solid #3d3d5c; /* Linea verticale grigia divisoria */
+  border-right: 1px solid #3d3d5c;
+  /* Linea verticale grigia divisoria */
 }
 
 .box-stat:last-child {
-  border-right: none; /* Rimuove la linea dall'ultimo elemento */
+  border-right: none;
+  /* Rimuove la linea dall'ultimo elemento */
 }
 
 .lbl-stat {
@@ -340,11 +349,13 @@ margin-top: -8px;
   font-weight: bold;
   font-size: 1.4rem;
 }
+
 .num-red {
   color: #ff4757;
   font-weight: bold;
   font-size: 1.4rem;
 }
+
 .num-blue {
   color: #5352ed;
   font-weight: bold;
@@ -406,6 +417,7 @@ margin-top: -8px;
   transition: background-color 0.2s;
   justify-content: center;
 }
+
 #button-gofeedback:hover {
   background-color: white;
   color: #1b273f;
@@ -423,7 +435,7 @@ margin-top: -8px;
 .star-container {
   display: flex;
   justify-content: space-around;
-  
+
 }
 
 .star {
@@ -488,9 +500,8 @@ margin-top: -8px;
   width: 100%;
   border-radius: 6px;
   font-family: Arial, Helvetica, sans-serif;
-  padding-top:5px;
+  padding-top: 5px;
 }
-
 
 #char-counter-liked {
   text-align: right;
@@ -517,7 +528,7 @@ margin-top: -8px;
   width: 100%;
   border-radius: 6px;
   font-family: Arial, Helvetica, sans-serif;
-  padding-top:5px;
+  padding-top: 5px;
 }
 
 #char-counter-advice {
@@ -560,7 +571,7 @@ margin-top: -8px;
   transition: background-color 0.2s;
   justify-content: center;
   margin-top: 30px;
-  
+
 }
 
 #submit-feed:hover {
@@ -582,9 +593,9 @@ input::placeholder {
 /* Pagina Ringraziamento */
 
 #thanks-feed-title {
- font-size: 2rem;
- text-align: center;
- margin-bottom: 50px;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .goodbye {

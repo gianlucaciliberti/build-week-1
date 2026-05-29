@@ -7,8 +7,8 @@ Benvenuto nel repository di **EPIQUIZ**, un'applicazione web interattiva per qui
 2. [💻 Tecnologie Utilizzate](#tecnologie-utilizzate)
 3. [📂 Struttura del Progetto](#struttura-del-progetto)
 4. [🔧 Architettura del Codice (State-Render-Events)](#architettura-del-codice-state-render-events)
-5. [⚙️ Funzioni Principali](#funzioni-principali)
-6. [💡 Funzionalità nel Dettaglio](#funzionalita-nel-dettaglio)
+5. [📝 Funzioni Principali](#funzioni-principali)
+6. [🔎 Funzionalità nel Dettaglio](#funzionalità-nel-dettaglio)
 7. [🚀 Possibili Migliorie](#possibili-migliorie)
 
 ---
@@ -54,7 +54,7 @@ L'applicazione segue il pattern architetturale **State ➡️ Render ➡️ Even
 
 ---
 
-## 🎯Funzioni Principali
+## 📝Funzioni Principali
 Il comportamento e l'interattività dell'applicazione sono governati dalle seguenti funzioni JavaScript:
 
 ### `renderWelcome()` 
@@ -72,21 +72,21 @@ Genera la schermata iniziale di benvenuto. Inizializza lo stato del quiz (azzera
 
 ---
 
-## ⚙️Funzionalità nel Dettaglio
+## 🔎Funzionalità nel Dettaglio
 L'applicazione integra accorgimenti specifici per ottimizzare l'esperienza utente ed evitare i bug tipici del DOM:
 
- **Method sort(()=> Math.random() -0.5)** ➤ Utilizzato per randomizzare l’ordine delle domande e mischiare dinamicamente le risposte del quiz
- **Property innerHTML** ➤ Impiegata per aggiornare e gestire i contenuti mostrati nelle diverse schermate dell’applicazione
- **Method querySelector & querySelectorAll** ➤ Utilizzati per selezionare e manipolare gli elementi del DOM, collegando struttura, stile e logica del progetto
- **Method classList.add** ➤ Per poter modificare stilisticamente determinati oggetti
- **Method map(...).join("")**  ➤ Sfruttato per generare dinamicamente elementi HTML a partire dagli array, creando automaticamente i pulsanti delle risposte
- **Method forEach**  ➤ Utilizzato per aggiornare in tempo reale il punteggio e gestire la visualizzazione del risultato finale          
- **Function setTimeout**  ➤ Impiegata per controllare il delay tra l’azione dell’utente e il caricamento della schermata successiva
- **Function setInterval & clearInterval**  ➤ Utilizzate per creare, aggiornare e interrompere il timer automatico delle domande
+ * **Method sort(()=> Math.random() -0.5)** ➤ Utilizzato per randomizzare l’ordine delle domande e mischiare dinamicamente le risposte del quiz
+ * **Property innerHTML** ➤ Impiegata per aggiornare e gestire i contenuti mostrati nelle diverse schermate dell’applicazione
+ * **Method querySelector & querySelectorAll** ➤ Utilizzati per selezionare e manipolare gli elementi del DOM, collegando struttura, stile e logica del progetto
+ * **Method classList.add** ➤ Per poter modificare stilisticamente determinati oggetti
+ * **Method map(...).join("")**  ➤ Sfruttato per generare dinamicamente elementi HTML a partire dagli array, creando automaticamente i pulsanti delle risposte
+ * **Method forEach**  ➤ Utilizzato per aggiornare in tempo reale il punteggio e gestire la visualizzazione del risultato finale          
+ * **Function setTimeout**  ➤ Impiegata per controllare il delay tra l’azione dell’utente e il caricamento della schermata successiva
+ * **Function setInterval & clearInterval**  ➤ Utilizzate per creare, aggiornare e interrompere il timer automatico delle domande
 
 ---
 
-## 🚀Possibili Migliori
+## 🚀Possibili Migliorie
 Per futuri cicli di sviluppo, analizzando l'attuale base di codice, sono state identificate le seguenti ottimizzazioni:
 
 * **Recap risposte:** Attualmente l'utente non è in grado di poter visionare un recap delle domande con un salvataggio della risposta. Vorremmo implementare questa funzione nella sezione `renderResults`, ad esempio con un menù a tendina: mostrando la risposta corretta e quella dell'utente (nel caso sia errata).
