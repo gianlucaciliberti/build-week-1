@@ -22,9 +22,9 @@ L'obiettivo principale di questa Build Week è stato simulare un ambiente di lav
 ## Tecnologie Utilizzate
 L'applicazione è stata sviluppata utilizzando un parco tecnologie snello e performante:
 <!-- eventualmente aggiungere badge, screenshot e quant'altro -->
--🌐 HTML               # Per definire la struttura della singola pagina
--🎨 CSS                # Per controllare la parte stilistica del progetto
--⚡ JavaScript         # Per creare contenuti dinamici e manipolare i singoli eventi
+- 🌐 HTML → Per definire la struttura della singola pagina
+- 🎨 CSS  → Per controllare la parte stilistica del progetto
+- ⚡ JavaScript → Per creare contenuti dinamici e manipolare i singoli eventi
 
 ---
 
